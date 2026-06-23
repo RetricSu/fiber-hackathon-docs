@@ -79,7 +79,7 @@ Before you begin, make sure you have:
 
 ### The minimum commands you should know
 
-
+The `fnn` binary exposes HTTP RPC and CLI-based node-maintenance tooling. The fiber pre-built release also contains the a official command-line tool called `fnn-cli` for managing a Fiber node.
 
 ```bash
 ./fnn-cli info
@@ -128,27 +128,45 @@ You can describe, in your own words, how a payment moves from invoice to final s
 
 ---
 
-## Stage 3: Core Features for Real Apps (2–4 hours)
+## Stage 3: SDK for Developing Apps (2–4 hours)
 
-**Goal:** Start thinking like an application developer rather than a protocol explorer.
+**Goal:** Move from CLI-based experimentation to building an application with Fiber.
 
-Once the basic flow works, go deeper into the pieces that matter for actual products:
+At this stage, the main question is no longer “how do I run a node?” but “how do I connect an app to Fiber?”
 
-- invoices and payment lifecycle
-- channel management and liquidity
-- direct and routed payments
-- stablecoin or UDT-based flows
-- how Fiber fits into a browser app, backend service, or agent workflow
+### Recommended references
 
-This is the point where you should connect the protocol to your own idea. Ask:
+- [SDK overview](https://www.fiber.world/docs/build/sdk)
+- [JavaScript SDK guide](https://www.fiber.world/docs/build/sdk/fiber-js)
+- Use the Javascript SDK to build a [simple game](https://www.fiber.world/docs/build/simple-game)
+- [Toolchain overview](https://www.fiber.world/docs/build/toolchain)
 
-- Does my app need fast micropayments or on-chain finality?
-- Will users run their own node, or will my app operate one on their behalf?
-- Is this a browser app, a backend service, or an agent-based workflow?
+### What to learn
+
+The official SDK docs describe a JavaScript/TypeScript client for connecting to an existing Fiber node over HTTP. In practice, this means:
+
+- installing `@ckb-ccc/fiber`
+- creating a `FiberSDK` instance with your node RPC endpoint
+- checking node state with `getNodeInfo()`
+- opening channels, creating invoices, and sending payments from your app code
+- understanding the two-party model: one side opens, the other accepts; one side invoices, the other pays
+
+A good mental model is:
+
+- the node provides the protocol runtime
+- the SDK gives your app a typed interface to that runtime
+- your application logic sits above them both
+
+### What to practice
+
+1. connect a small app or script to a running node
+2. create an invoice and pay it from code
+3. inspect node state and channel data from the SDK
+4. compare the SDK workflow with the CLI workflow to understand where each is useful
 
 ### Success checkpoint
 
-You can explain how invoices, channels, and routing fit into a simple user story or demo.
+You can write a small script or prototype that connects to a Fiber node and performs a basic invoice/payment flow through the SDK.
 
 ---
 
@@ -156,40 +174,19 @@ You can explain how invoices, channels, and routing fit into a simple user story
 
 **Goal:** Prepare for real usage, not just a local demo.
 
-When your basic flow is stable, start thinking about operations:
+At this point, you should combine application design with operational planning. Think about:
 
-- backup your node state and keys
-- understand liquidity and channel management
-- plan for security and key rotation
-- decide whether your app should target Testnet or Mainnet
-- think about deployment for a real service or routing node
+- whether your app needs fast micropayments, on-chain finality, or both
+- whether users will run their own node or whether your app will operate one on their behalf
+- whether this is a browser app, a backend service, or an agent-based workflow
+- how to manage liquidity, channel lifecycle, [backups](https://fiber-docs-git-doc20-ckba-team.vercel.app/docs/operate/backup) and key security
+- whether your integration should target Testnet first or move directly toward Mainnet readiness
 
 This is the phase where you move from “hello world” to something that could support a real prototype or a production-style integration.
 
 ### Success checkpoint
 
-You can describe the operational risks and requirements for running a node or integrating Fiber into an application.
-
----
-
-## Suggested Learning Path for This Repo
-
-If you are using this repository as a hackathon or workshop companion, we recommend this order:
-
-1. read this onboarding guide
-2. follow the official quick-start docs to get a working node
-3. use the tutorials in this repository for a concrete demo pattern
-4. choose one production topic to study before shipping anything
-
----
-
-## Common Pitfalls
-
-- forgetting that amounts are expressed in shannons
-- using the wrong network for funding
-- assuming a payment will work without enough liquidity
-- treating the backend as the place where Fiber RPC should live in a browser app without a clear reason
-- upgrading node software without understanding storage and channel-state implications
+You can describe the operational risks and integration choices for running a node or embedding Fiber into an application.
 
 ---
 
@@ -200,4 +197,4 @@ If you are using this repository as a hackathon or workshop companion, we recomm
 - [tutorials/fiber-game.md](./tutorials/fiber-game.md) for a practical demo flow
 - [tutorials/fiber-l402.md](./tutorials/fiber-l402.md) for paywall-style integration ideas
 
-If you get stuck, the official docs and the Nervos community are the best places to continue from here.
+If you get stuck, the official docs and the CKB builder community are the best places to continue from here.
