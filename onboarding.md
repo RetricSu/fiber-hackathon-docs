@@ -1,10 +1,8 @@
 # Fiber Developer Onboarding
 
-Welcome to CKB Fiber. This guide is designed to help new developers go from “I have heard of Fiber” to “I can run a node, complete a real transfer, and start building on top of it.”
+This guide is designed to help new developers go from “I have heard of Fiber” to “I can run a node, complete a real transfer, and start building on top of it.”
 
 The goal is not to overwhelm you with protocol detail on day one. The goal is to help you reach the first meaningful milestone as quickly as possible: a working node, a successful payment, and a clear sense of where to go next.
-
-> Primary reference: the official Fiber 2.0 documentation. This repository is a practical companion for orientation, demos, and hackathon-style learning.
 
 ---
 
@@ -12,11 +10,10 @@ The goal is not to overwhelm you with protocol detail on day one. The goal is to
 
 By the end of this path, you should be able to:
 
-- explain what Fiber is and how it differs from traditional payment channels
-- run a Fiber node on Testnet
-- inspect node state and basic channel information
-- complete a basic transfer flow
-- decide how Fiber fits into your own project or demo
+- understand what Fiber is and how it differs from Bitcoin Lightning
+- run a Fiber node on Testnet and use its basic CLI/RPC commands to inspect basic information
+- open a channel, create or receive an invoice, and complete a first transfer flow
+- connect a simple app or script to a running node through the SDK and decide whether Fiber fits your own project or demo
 
 ---
 
@@ -37,10 +34,10 @@ Think through these three questions:
    Read the overview and light paper to understand why Fiber is useful for fast, low-cost, repeated transfers and why off-chain channels matter.
 
 2. **How do payment channels and multi-hop routing work?**
-   Read the “How Fiber Network Works” page to understand how channels are opened, updated, and settled, and how payments can travel through intermediate nodes.
+   Read the “How Fiber Network Works” page and click the simulation to understand how channels are opened, updated, and settled, and how payments can travel through intermediate nodes.
 
 3. **How is Fiber different from Bitcoin Lightning?**
-   Read the light paper and the overview together. The key difference is that Fiber is built on CKB, designed for multi-asset, cross chain hub and programmable payment flows, and aims to be more composable with CKB-native assets and smart contract logic.
+   Read the light paper and the overview together. The key difference is that Fiber is built on CKB, designed for multi-asset, cross-chain and programmable payment flows, and aims to be more composable with CKB-native assets and smart contract logic.
 
 ### What to understand
 
@@ -48,7 +45,7 @@ Think through these three questions:
 - A channel is a shared state between two participants, not a permanent ledger entry for every payment.
 - Routing depends on available liquidity, so a path may exist in theory but still fail in practice if the capacity is insufficient.
 - The base-layer role of CKB is to anchor and enforce the channel state when channels open, update, or close.
-- Compared with Bitcoin Lightning, Fiber is positioned as a CKB-native payment channel network with broader multi-asset, built-in cross chain hub and programmability goals.
+- Compared with Bitcoin Lightning, Fiber is positioned as a CKB-native payment channel network with broader multi-asset, built-in cross-chain and programmability goals.
 
 ### Success checkpoint
 
@@ -58,14 +55,14 @@ You should be able to answer these three questions in your own words: why Fiber 
 
 ## Stage 1: Quick Start (30–60 minutes)
 
-**Goal:** Reach the “aha” moment quickly by getting a node running and completing a first transfer.
+**Goal:** Reach the “aha” moment quickly by getting a node running.
 
 ### Recommended path
 
 For most developers, the fastest route is:
 
 1. follow the official quick-start guide for [Run a Fiber Node](https://www.fiber.world/docs/quick-start/run-a-node). Notes: use a pre-built binary first; build from source only if you need full control or custom development.
-2. You can also use [docker-compose](https://github.com/Officeyutong/fiber-demo-startup) to start up 3 nodes on your local machine and use this frontend to give it a inspect what a smallest fiber network looks like.
+2. You can also use [docker-compose](https://github.com/Officeyutong/fiber-demo-startup) to start 3 nodes on your local machine and use this frontend to inspect what a smallest Fiber network looks like.
 
 ### Basic setup checklist
 
@@ -79,7 +76,7 @@ Before you begin, make sure you have:
 
 ### The minimum commands you should know
 
-The `fnn` binary exposes HTTP RPC and CLI-based node-maintenance tooling. The fiber pre-built release also contains the a official command-line tool called `fnn-cli` for managing a Fiber node.
+The fiber pre-built release contains two binaries `fnn` and `fnn-cli`. The `fnn` binary exposes HTTP RPC and node-maintenance tooling.  The `fnn-cli` is the official command-line tool for managing a Fiber node.
 
 ```bash
 ./fnn-cli info
@@ -92,7 +89,7 @@ These are the core commands you will come back to when inspecting your node, deb
 
 ### Success checkpoint
 
-You have a running node on Testnet, the node responds to basic inspection commands, and you have inspect the smallest local network for fiber in your machine.
+You have a running node on Testnet, the node responds to basic inspection commands and RPC calls, and you have inspect the smallest local network for fiber in your machine.
 
 ---
 
@@ -134,12 +131,11 @@ You can describe, in your own words, how a payment moves from invoice to final s
 
 At this stage, the main question is no longer “how do I run a node?” but “how do I connect an app to Fiber?”
 
-### Recommended references
+### Recommended path
 
-- [SDK overview](https://www.fiber.world/docs/build/sdk)
-- [JavaScript SDK guide](https://www.fiber.world/docs/build/sdk/fiber-js)
-- Use the Javascript SDK to build a [simple game](https://www.fiber.world/docs/build/simple-game)
-- [Toolchain overview](https://www.fiber.world/docs/build/toolchain)
+- quickly go through the [SDK overview](https://www.fiber.world/docs/build/sdk)
+- learn the basics from the [JavaScript SDK guide](https://www.fiber.world/docs/build/sdk/fiber-js)
+- Use the Javascript SDK to build a [simple game with Fiber micro-payments](https://www.fiber.world/docs/build/simple-game)
 
 ### What to learn
 
@@ -176,11 +172,10 @@ You can write a small script or prototype that connects to a Fiber node and perf
 
 At this point, you should combine application design with operational planning. Think about:
 
-- whether your app needs fast micropayments, on-chain finality, or both
+- whether your app needs fast micro-payments, on-chain finality, or both
 - whether users will run their own node or whether your app will operate one on their behalf
 - whether this is a browser app, a backend service, or an agent-based workflow
 - how to manage liquidity, channel lifecycle, [backups](https://fiber-docs-git-doc20-ckba-team.vercel.app/docs/operate/backup) and key security
-- whether your integration should target Testnet first or move directly toward Mainnet readiness
 
 This is the phase where you move from “hello world” to something that could support a real prototype or a production-style integration.
 
@@ -192,9 +187,8 @@ You can describe the operational risks and integration choices for running a nod
 
 ## Where to go next
 
-- [README](./README.md) for the repo overview
-- [resources.md](./resources.md) for tools and reference links
-- [tutorials/fiber-game.md](./tutorials/fiber-game.md) for a practical demo flow
+- [resources.md](./resources.md) for available tools and reference links
 - [tutorials/fiber-l402.md](./tutorials/fiber-l402.md) for paywall-style integration ideas
+- [tutorials/fiber-game.md](./tutorials/fiber-game.md) for a practical demo flow
 
 If you get stuck, the official docs and the CKB builder community are the best places to continue from here.

@@ -1,8 +1,8 @@
 # Fiber Developer Resources
 
-A curated collection of tools, documentation, SDKs, and community projects for building on the CKB Fiber Network. Use this page as a starting point for hackathon projects and production prototypes.
+A curated list of entry points for learning, building, and experimenting with CKB Fiber. This page is intentionally lightweight: it focuses on official references first and keeps community projects clearly labeled as experimental.
 
-> **Curation note:** The Fiber ecosystem is young and moving fast. Community hackathon projects are included because they show patterns you can reuse, but many are experimental or no longer maintained. Treat them as reference implementations rather than production dependencies.
+> **Curation note:** The Fiber ecosystem is still evolving. Community projects are useful for inspiration and pattern reference, but they may be incomplete, unmaintained, or not suitable for production use.
 
 ---
 
@@ -24,37 +24,41 @@ The reference implementation is [nervosnetwork/fiber](https://github.com/nervosn
 
 | Resource | Description | Link |
 |----------|-------------|------|
-| **Fiber Network Node (FNN)** | Source code, testnet config, build instructions, and protocol docs. | [github.com/nervosnetwork/fiber](https://github.com/nervosnetwork/fiber) |
-| **Official Fiber Docs** | Fumadocs-based documentation site source. | [github.com/nervosnetwork/fiber-docs](https://github.com/nervosnetwork/fiber-docs) |
-| **Run a Fiber Node** | Step-by-step guide for testnet setup using v0.8.0. | [fiber.world/docs/quick-start/run-a-node](https://www.fiber.world/docs/quick-start/run-a-node) |
-| **Basic Transfer Example** | Send and receive payments after your node is running. | [fiber.world/docs/quick-start/basic-transfer](https://www.fiber.world/docs/quick-start/basic-transfer) |
-| **Light Paper** | Protocol design and motivation. | [github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md) |
-| **Glossary** | Key terms (PTLC, HTLC, hold invoice, etc.). | [github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md) |
-| **RPC Documentation** | All JSON-RPC methods and parameters. | [github.com/nervosnetwork/fiber/blob/develop/crates/fiber-lib/src/rpc/README.md](https://github.com/nervosnetwork/fiber/blob/develop/crates/fiber-lib/src/rpc/README.md) |
-| **Invoice Protocol** | Payment invoice format and semantics. | [github.com/nervosnetwork/fiber/blob/develop/docs/specs/payment-invoice.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/specs/payment-invoice.md) |
-| **P2P Message Protocol** | Low-level peer messaging spec. | [github.com/nervosnetwork/fiber/blob/develop/docs/specs/p2p-message.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/specs/p2p-message.md) |
-| **Dev Log Archive** | Pre-mainnet development updates and discussions. | [github.com/nervosnetwork/fiber/discussions/601](https://github.com/nervosnetwork/fiber/discussions/601) |
+| **Fiber Docs** | Primary official documentation site for getting started and building on Fiber. | [fiber.world/docs](https://www.fiber.world/docs) |
+| **Fiber Node (FNN)** | Reference implementation, node source, build instructions, and protocol docs. | [github.com/nervosnetwork/fiber](https://github.com/nervosnetwork/fiber) |
+| **Run a Fiber Node** | Official quick-start for setting up a node on Testnet. | [fiber.world/docs/quick-start/run-a-node](https://www.fiber.world/docs/quick-start/run-a-node) |
+| **Basic Transfer** | Official example for opening a channel and sending a payment. | [fiber.world/docs/quick-start/basic-transfer](https://www.fiber.world/docs/quick-start/basic-transfer) |
+| **Light Paper** | Protocol motivation and high-level design. | [github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md) |
+| **Glossary** | Key terms such as HTLC, PTLC, invoices, and routing concepts. | [github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md) |
+| **RPC Docs** | JSON-RPC methods and parameters for node integration. | [github.com/nervosnetwork/fiber/blob/develop/crates/fiber-lib/src/rpc/README.md](https://github.com/nervosnetwork/fiber/blob/develop/crates/fiber-lib/src/rpc/README.md) |
+| **SDK Docs** | Official SDK entry point for app development. | [fiber.world/docs/build/sdk](https://www.fiber.world/docs/build/sdk) |
 
 ---
 
 ## SDKs and Libraries
 
-### JavaScript / TypeScript
+### Official / Recommended
 
 | Package | Purpose | Link |
 |---------|---------|------|
-| **`@fiber-pay/sdk`** | Core SDK for Fiber apps. Includes `FiberRpcClient`, browser WASM helpers, L402 middleware, and CCC funding resolver. | [npmjs.com/package/@fiber-pay/sdk](https://www.npmjs.com/package/@fiber-pay/sdk) |
-| **`@nervosnetwork/fiber-js`** | JavaScript wrapper over the Fiber WASM runtime. Required peer dependency for browser apps. | [npmjs.com/package/@nervosnetwork/fiber-js](https://www.npmjs.com/package/@nervosnetwork/fiber-js) |
-| **`@ckb-ccc/ccc`** | CKBers' Codebase — one-stop TypeScript SDK for CKB transactions, wallets, and assets. Useful when your app needs on-chain CKB logic alongside Fiber. | [docs.ckbccc.com](https://docs.ckbccc.com/) |
-| **`@ckb-ccc/connector-react`** | React connector UI for CCC wallets. | [npmjs.com/package/@ckb-ccc/connector-react](https://www.npmjs.com/package/@ckb-ccc/connector-react) |
-| **`@agentpay-dev/sdk`** | SDK for AI agents paying via CKB Fiber. | [npmjs.com/package/@agentpay-dev/sdk](https://www.npmjs.com/package/@agentpay-dev/sdk) |
+| **`@ckb-ccc/fiber`** | Official JavaScript/TypeScript SDK for building apps on top of an existing Fiber node. Best starting point for most app integrations. | [fiber.world/docs/build/sdk/fiber-js](https://www.fiber.world/docs/build/sdk/fiber-js) |
+| **`@ckb-ccc/ccc`** | CKBers' Codebase — useful when your app needs wallet, transaction, or asset handling alongside Fiber. | [docs.ckbccc.com](https://docs.ckbccc.com/) |
+| **`@ckb-ccc/connector-react`** | React-based connector UI for CCC wallets. | [npmjs.com/package/@ckb-ccc/connector-react](https://www.npmjs.com/package/@ckb-ccc/connector-react) |
+
+### Community / Experimental
+
+| Package | Purpose | Link |
+|---------|---------|------|
+| **`@fiber-pay/sdk`** | Community SDK for Fiber-related integrations. Useful for reference, but not the primary official SDK entry point. | [npmjs.com/package/@fiber-pay/sdk](https://www.npmjs.com/package/@fiber-pay/sdk) |
+| **`@agentpay-dev/sdk`** | SDK for AI-agent payment flows on CKB Fiber. | [npmjs.com/package/@agentpay-dev/sdk](https://www.npmjs.com/package/@agentpay-dev/sdk) |
+| **`@nervosnetwork/fiber-js`** | Browser-oriented wrapper around the Fiber runtime. Keep this as a lower-level/reference option. | [npmjs.com/package/@nervosnetwork/fiber-js](https://www.npmjs.com/package/@nervosnetwork/fiber-js) |
 
 ### Other Languages
 
 | Package | Purpose | Link |
 |---------|---------|------|
-| **`nervosnetwork/fiber-py-integration-test`** | Python integration tests — useful for understanding protocol flows. | [github.com/nervosnetwork/fiber-py-integration-test](https://github.com/nervosnetwork/fiber-py-integration-test) |
-| **`ckb-sdk-go` / `ckb-sdk-java`** | Go and Java SDKs for CKB base layer (not Fiber-specific). | [github.com/nervosnetwork/ckb-sdk-go](https://github.com/nervosnetwork/ckb-sdk-go), [github.com/nervosnetwork/ckb-sdk-java](https://github.com/nervosnetwork/ckb-sdk-java) |
+| **`nervosnetwork/fiber-py-integration-test`** | Python integration tests for understanding protocol flows. | [github.com/nervosnetwork/fiber-py-integration-test](https://github.com/nervosnetwork/fiber-py-integration-test) |
+| **`ckb-sdk-go` / `ckb-sdk-java`** | Go and Java SDKs for the CKB base layer (not Fiber-specific). | [github.com/nervosnetwork/ckb-sdk-go](https://github.com/nervosnetwork/ckb-sdk-go), [github.com/nervosnetwork/ckb-sdk-java](https://github.com/nervosnetwork/ckb-sdk-java) |
 
 ---
 
@@ -145,7 +149,7 @@ The [Claw & Order: CKB AI Agent Hackathon](https://talk.nervos.org/t/claw-order-
 - [ ] You have CKB testnet CKB from the [faucet](https://faucet.nervos.org/).
 - [ ] You can run a local FNN node or connect to an existing one.
 - [ ] You understand the difference between **base-layer CKB transactions** (on-chain, slow, final) and **Fiber payments** (off-channel, fast, requires liquidity).
-- [ ] You know whether your app needs **direct JSON-RPC**, **`@fiber-pay/sdk`**, or a **higher-level framework like CCC**.
+- [ ] You know whether your app needs **direct JSON-RPC**, the official **`@ckb-ccc/fiber`** SDK, or a **higher-level framework like CCC**.
 - [ ] For browser apps, you have a plan for the WASM runtime size and required COOP/COEP headers.
 
 ---
