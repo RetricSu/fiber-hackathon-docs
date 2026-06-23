@@ -1,305 +1,203 @@
-# Fiber Developer Onboarding Workflow
+# Fiber Developer Onboarding
 
-A progressive, task-based path for developers new to CKB Fiber. Complete each step before moving to the next. Most steps are designed to be short; the whole path should take a focused weekend.
+Welcome to CKB Fiber. This guide is designed to help new developers go from “I have heard of Fiber” to “I can run a node, complete a real transfer, and start building on top of it.”
 
----
+The goal is not to overwhelm you with protocol detail on day one. The goal is to help you reach the first meaningful milestone as quickly as possible: a working node, a successful payment, and a clear sense of where to go next.
 
-## Milestone 0: Understand the Big Picture (1–2 hours)
-
-**Goal:** Know what Fiber is, why it exists, and when to use it.
-
-### Task 0.1 — Read the Light Paper
-Read the [Fiber Light Paper](https://github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md) and note:
-
-- How Fiber compares to Lightning Network.
-- The role of payment channels, PTLC, and multi-hop payments.
-- Why CKB's cell model makes Fiber "composable" with other scripts.
-
-### Task 0.2 — Learn the Key Terms
-Read the [Glossary](https://github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md) and make sure you can explain:
-
-- Channel, peer, funding transaction
-- Invoice, hold invoice, payment hash, preimage
-- PTLC vs HTLC
-- Adaptor signature
-- Liquidity and routing
-
-### Task 0.3 — Decide Your Stack
-Answer these questions for your hackathon idea:
-
-1. Does your app need **fast micropayments** or **on-chain finality**?
-2. Will users run their own Fiber node, or will you operate one on their behalf?
-3. Is your frontend a browser app, a backend service, or an agent/MCP tool?
-
-> **Checkpoint:** Write a one-paragraph project pitch that includes the word "channel" correctly.
+> Primary reference: the official Fiber 2.0 documentation. This repository is a practical companion for orientation, demos, and hackathon-style learning.
 
 ---
 
-## Milestone 1: Set Up Your Development Environment (2–3 hours)
+## What you will learn
 
-**Goal:** Have a working Fiber testnet node and tooling.
+By the end of this path, you should be able to:
 
-### Task 1.1 — Install Dependencies
-Install the following:
-
-- [Rust](https://rustup.rs/) and Cargo (to build FNN from source)
-- [Git](https://git-scm.com/)
-- [ckb-cli](https://github.com/nervosnetwork/ckb-cli) for key management
-- (Optional) [Node.js 20+](https://nodejs.org/) and [pnpm](https://pnpm.io/) if building JS/TS apps
-
-### Task 1.2 — Build or Download FNN
-Choose one:
-
-**Option A: Build from source**
-```bash
-git clone https://github.com/nervosnetwork/fiber.git
-cd fiber
-cargo build --release
-```
-
-**Option B: Use a pre-built release**
-Download the latest release from [github.com/nervosnetwork/fiber/releases](https://github.com/nervosnetwork/fiber/releases).
-
-### Task 1.3 — Create a Node Directory
-```bash
-mkdir /folder-to/my-fnn
-cp target/release/fnn /folder-to/my-fnn         # or downloaded binary
-cp target/release/fnn-migrate /folder-to/my-fnn
-cp target/release/fnn-cli /folder-to/my-fnn
-cp config/testnet/config.yml /folder-to/my-fnn
-cd /folder-to/my-fnn
-```
-
-### Task 1.4 — Create or Import a CKB Key
-```bash
-ckb-cli account new
-mkdir ckb
-ckb-cli account export --lock-arg <lock_arg> --extended-privkey-path ./ckb/exported-key
-head -n 1 ./ckb/exported-key > ./ckb/key
-rm ./ckb/exported-key
-```
-
-### Task 1.5 — Start the Node
-```bash
-FIBER_SECRET_KEY_PASSWORD='YOUR_PASSWORD' RUST_LOG='info' ./fnn -c config.yml -d .
-```
-
-Leave it running and watch the logs. You should see it sync with the testnet.
-
-> **Checkpoint:** Run `./fnn-cli info` and confirm you see a `pubkey` and sync status.
+- explain what Fiber is and how it differs from traditional payment channels
+- run a Fiber node on Testnet
+- inspect node state and basic channel information
+- complete a basic transfer flow
+- decide how Fiber fits into your own project or demo
 
 ---
 
-## Milestone 2: Fund and Connect (2–3 hours)
+## Stage 0: Concepts Alignment (10–15 minutes)
 
-**Goal:** Get testnet CKB, open a channel, and make a basic transfer.
+**Goal:** Build a simple mental model before touching the tooling.
 
-### Task 2.1 — Get Testnet CKB
-1. Copy your testnet address from `ckb-cli` or `./fnn-cli info`.
-2. Request CKB from the [testnet faucet](https://faucet.nervos.org/).
-3. Wait for the transaction to confirm on testnet.
+Start with these references:
 
-### Task 2.2 — Connect to a Peer
-Find a public testnet node or ask in the [Nervos Discord](https://discord.gg/BF9AJ4fzs6). Then connect:
+- [What is Fiber Network?](https://www.fiber.world/docs)
+- [How Fiber Network Works](https://www.fiber.world/docs/how-it-works)
+- [Fiber Network Light Paper](https://github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md)
+- [Glossary](https://github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md)
 
-```bash
-./fnn-cli peer connect_peer \
-  --peer-id <peer_pubkey> \
-  --address /ip4/<ip>/tcp/<port>
-```
+Think through these three questions:
 
-Or via JSON-RPC:
-```bash
-curl -X POST http://127.0.0.1:8227 \
-  -H "Content-Type: application/json" \
-  -d '{
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method": "connect_peer",
-    "params": [{
-      "address": "/ip4/<ip>/tcp/<port>/p2p/<peer_pubkey>"
-    }]
-  }'
-```
+1. **Why does Fiber exist?**
+   Read the overview and light paper to understand why Fiber is useful for fast, low-cost, repeated transfers and why off-chain channels matter.
 
-### Task 2.3 — Open a Channel
-```bash
-./fnn-cli channel open_channel \
-  --peer-id <peer_pubkey> \
-  --funding-amount <shannons>
-```
+2. **How do payment channels and multi-hop routing work?**
+   Read the “How Fiber Network Works” page to understand how channels are opened, updated, and settled, and how payments can travel through intermediate nodes.
 
-> Amounts are in **shannons**: `1 CKB = 10^8 shannons`.
+3. **How is Fiber different from Bitcoin Lightning?**
+   Read the light paper and the overview together. The key difference is that Fiber is built on CKB, designed for multi-asset, cross chain hub and programmable payment flows, and aims to be more composable with CKB-native assets and smart contract logic.
 
-### Task 2.4 — Make a Payment
-Follow the [Basic Transfer Example](https://www.fiber.world/docs/quick-start/basic-transfer):
+### What to understand
 
-1. Create an invoice on the receiving node.
-2. Pay the invoice from the sending node.
-3. Verify the payment succeeded with `list_payments` or `get_payment`.
+- Fiber is not just “another wallet”; it is a network of payment channels.
+- A channel is a shared state between two participants, not a permanent ledger entry for every payment.
+- Routing depends on available liquidity, so a path may exist in theory but still fail in practice if the capacity is insufficient.
+- The base-layer role of CKB is to anchor and enforce the channel state when channels open, update, or close.
+- Compared with Bitcoin Lightning, Fiber is positioned as a CKB-native payment channel network with broader multi-asset, built-in cross chain hub and programmability goals.
 
-> **Checkpoint:** Successfully send at least one payment over a channel and confirm it with `list_payments`.
+### Success checkpoint
+
+You should be able to answer these three questions in your own words: why Fiber exists, how the channel/routing model works, and how it differs from Bitcoin Lightning.
 
 ---
 
-## Milestone 3: Use the SDK (3–4 hours)
+## Stage 1: Quick Start (30–60 minutes)
 
-**Goal:** Build a small script or web page that talks to your node.
+**Goal:** Reach the “aha” moment quickly by getting a node running and completing a first transfer.
 
-### Task 3.1 — Install the SDK
+### Recommended path
+
+For most developers, the fastest route is:
+
+1. follow the official quick-start guide for [Run a Fiber Node](https://www.fiber.world/docs/quick-start/run-a-node). Notes: use a pre-built binary first; build from source only if you need full control or custom development.
+2. You can also use [docker-compose](https://github.com/Officeyutong/fiber-demo-startup) to start up 3 nodes on your local machine and use this frontend to give it a inspect what a smallest fiber network looks like.
+
+### Basic setup checklist
+
+Before you begin, make sure you have:
+
+- Git
+- a shell environment
+- ckb-cli for key handling
+- access to Testnet funds
+- docker and docker-compose for the second path
+
+### The minimum commands you should know
+
+
+
 ```bash
-pnpm add @fiber-pay/sdk
-# For browser apps also add:
-pnpm add @nervosnetwork/fiber-js
+./fnn-cli info
+./fnn-cli peer list_peers
+./fnn-cli channel list_channels
+./fnn-cli --help
 ```
 
-### Task 3.2 — Query Node Info from a Script
-Create `node-info.ts`:
+These are the core commands you will come back to when inspecting your node, debugging issues, or checking basic state.
 
-```typescript
-import { FiberRpcClient } from '@fiber-pay/sdk';
+### Success checkpoint
 
-const client = new FiberRpcClient({
-  url: 'http://127.0.0.1:8227',
-  biscuitToken: process.env.FIBER_RPC_BISCUIT_TOKEN,
-});
-
-async function main() {
-  const info = await client.nodeInfo();
-  console.log('pubkey:', info.pubkey);
-}
-
-main();
-```
-
-Run it:
-```bash
-npx tsx node-info.ts
-```
-
-### Task 3.3 — List Peers and Channels
-Extend your script to print:
-
-- Connected peers
-- Open channels and their balances
-- Recent payments
-
-### Task 3.4 — Send a Payment from Code
-Use the SDK to:
-
-1. Create an invoice on a second node (or the same node).
-2. Pay it programmatically.
-3. Poll `get_payment` until it succeeds or fails.
-
-> **Checkpoint:** Your script can print node info, list channels, and send a payment without using `fnn-cli`.
+You have a running node on Testnet, the node responds to basic inspection commands, and you have inspect the smallest local network for fiber in your machine.
 
 ---
 
-## Milestone 4: Run a Demo (4–6 hours)
+## Stage 2: Your First Payment Flow (1–2 hours)
 
-**Goal:** Understand how a real Fiber app is architected.
+**Goal:** Move from “node is running” to “I understand the basic payment lifecycle.”
 
-### Task 4.1 — Set Up Two Local Nodes
-Use the `fiber-demo` setup script:
+At this stage, you should practice the essentials:
 
-```bash
-git clone https://github.com/quake/fiber-demo.git
-cd fiber-demo
-./scripts/setup-fiber-testnet.sh
-```
+- connect your node to another peer
+- open a channel
+- create or receive an invoice
+- send a payment and verify the result
 
-This starts two connected nodes (ports `8227` and `8229`) with a channel.
+### Recommended Path
 
-### Task 4.2 — Run the Game Demo
-```bash
-cd fiber-game/crates/fiber-game-demo
-FIBER_PLAYER_A_RPC_URL=http://localhost:8227 \
-FIBER_PLAYER_B_RPC_URL=http://localhost:8229 \
-cargo run
-```
+- starts with [Basic Transfer](https://www.fiber.world/docs/quick-start/basic-transfer)
+- continue with [Transfer Stablecoin](https://www.fiber.world/docs/quick-start/transfer-stablecoin)
+- Try [Connecting to Public testnet Nodes and do Multi-hop Transfer](https://www.fiber.world/docs/quick-start/multi-hop-transfer)
+- Whenever needed, check the [Network Resources](https://www.fiber.world/docs/quick-start/network-resources)
 
-Open two browser windows at `http://localhost:3000`, switch players, and play rock-paper-scissors.
+### What to practice
 
-### Task 4.3 — Answer These Architecture Questions
-1. Why does the backend make **zero** Fiber RPC calls?
-2. Where is each player's invoice created?
-3. How does the oracle decide who receives the funds?
-4. What prevents a player from refusing to reveal their move?
+1. confirm your node is connected and synced
+2. open a channel with a peer
+3. verify the channel state
+4. send an invoice and complete a payment
+5. inspect the payment result from the node
 
-> **Checkpoint:** You can explain the frontend-driven Fiber integration pattern to another developer.
+### Success checkpoint
+
+You can describe, in your own words, how a payment moves from invoice to final settlement through a channel.
 
 ---
 
-## Milestone 5: Build Your First Fiber Feature (1–2 days)
+## Stage 3: Core Features for Real Apps (2–4 hours)
 
-**Goal:** Ship a minimal but complete feature for your hackathon idea.
+**Goal:** Start thinking like an application developer rather than a protocol explorer.
 
-### Task 5.1 — Define the User Flow
-Draw or write:
+Once the basic flow works, go deeper into the pieces that matter for actual products:
 
-1. Who pays whom?
-2. When is an invoice created?
-3. What happens after payment succeeds?
-4. What happens if payment fails or times out?
+- invoices and payment lifecycle
+- channel management and liquidity
+- direct and routed payments
+- stablecoin or UDT-based flows
+- how Fiber fits into a browser app, backend service, or agent workflow
 
-### Task 5.2 — Implement the Backend (if needed)
-If your app needs state management, create a small HTTP service. Remember: **keep Fiber RPC calls out of the backend** unless you have a specific reason not to.
+This is the point where you should connect the protocol to your own idea. Ask:
 
-### Task 5.3 — Implement the Frontend
-Use `@fiber-pay/sdk` or `@fiber-pay/sdk/browser` to:
+- Does my app need fast micropayments or on-chain finality?
+- Will users run their own node, or will my app operate one on their behalf?
+- Is this a browser app, a backend service, or an agent-based workflow?
 
-- Query the user's node
-- Create or pay invoices
-- Handle success/failure states
+### Success checkpoint
 
-### Task 5.4 — Test Edge Cases
-- Node offline
-- Insufficient channel balance
-- Invoice expired
-- User cancels payment
-
-### Task 5.5 — Document Your Project
-Write a short `README.md` with:
-
-- What it does
-- How to run it
-- How to fund the testnet wallet
-- Known limitations
-
-> **Checkpoint:** A teammate can clone your repo, fund a wallet, and use your feature end-to-end.
+You can explain how invoices, channels, and routing fit into a simple user story or demo.
 
 ---
 
-## Optional Deep Dives
+## Stage 4: Production Readiness (next steps)
 
-Pick one based on your project direction:
+**Goal:** Prepare for real usage, not just a local demo.
 
-| Direction | Next Step |
-|-----------|-----------|
-| **AI agents / MCP** | Study `fiber-pilot` and `Fiber Agent Pay` from the hackathon. |
-| **Paywalls / L402** | Follow the [fiber-l402 tutorial](./tutorials/fiber-l402.md) and then try [fiber-x402-blog](https://github.com/RetricSu/fiber-x402-blog). |
-| **Gaming / betting** | Follow the [fiber-game tutorial](./tutorials/fiber-game.md) and adapt the protocol. |
-| **Cross-chain swaps** | Read the cross-network sections of the Fiber repo and experiment with Lightning-compatible features. |
-| **Production node ops** | Set up `fnn-cli` automation, backups, watchtower, and WSS configuration. |
+When your basic flow is stable, start thinking about operations:
+
+- backup your node state and keys
+- understand liquidity and channel management
+- plan for security and key rotation
+- decide whether your app should target Testnet or Mainnet
+- think about deployment for a real service or routing node
+
+This is the phase where you move from “hello world” to something that could support a real prototype or a production-style integration.
+
+### Success checkpoint
+
+You can describe the operational risks and requirements for running a node or integrating Fiber into an application.
+
+---
+
+## Suggested Learning Path for This Repo
+
+If you are using this repository as a hackathon or workshop companion, we recommend this order:
+
+1. read this onboarding guide
+2. follow the official quick-start docs to get a working node
+3. use the tutorials in this repository for a concrete demo pattern
+4. choose one production topic to study before shipping anything
 
 ---
 
 ## Common Pitfalls
 
-1. **Forgetting shannons.** All Fiber amounts are in shannons. `100000000` = 1 CKB.
-2. **Funding from the wrong network.** Make sure your faucet request targets testnet, not mainnet.
-3. **Backend calling Fiber RPC.** In browser apps, the user's browser should talk to their own node. The backend should only manage app state.
-4. **Ignoring channel liquidity.** A payment only succeeds if there is enough outbound capacity along the route.
-5. **Upgrading without closing channels.** FNN storage format may change between versions; close channels before upgrading.
+- forgetting that amounts are expressed in shannons
+- using the wrong network for funding
+- assuming a payment will work without enough liquidity
+- treating the backend as the place where Fiber RPC should live in a browser app without a clear reason
+- upgrading node software without understanding storage and channel-state implications
 
 ---
 
-## Need Help?
+## Where to go next
 
-- [Nervos Discord — Fiber channel](https://discord.gg/BF9AJ4fzs6)
-- [Nervos Talk — English category](https://talk.nervos.org/c/english/49)
-- [Fiber GitHub Issues](https://github.com/nervosnetwork/fiber/issues)
+- [README](./README.md) for the repo overview
+- [resources.md](./resources.md) for tools and reference links
+- [tutorials/fiber-game.md](./tutorials/fiber-game.md) for a practical demo flow
+- [tutorials/fiber-l402.md](./tutorials/fiber-l402.md) for paywall-style integration ideas
 
----
-
-*Last updated: 2026-06-18*
+If you get stuck, the official docs and the Nervos community are the best places to continue from here.

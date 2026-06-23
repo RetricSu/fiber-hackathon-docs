@@ -14,7 +14,7 @@ This directory contains developer-facing documentation for the CKB Fiber hackath
 ## Suggested Order
 
 1. Start with [`resources.md`](./resources.md) to understand the ecosystem.
-2. Follow [`onboarding.md`](./onboarding.md) to set up your environment and make your first payment.
+2. Follow [`onboarding.md`](./onboarding.md) for a four-stage learning path: concepts → quick start → core features → production readiness.
 3. Pick a tutorial based on your project idea:
    - Gaming / betting / fair protocols → [`fiber-game.md`](./tutorials/fiber-game.md)
    - Paywalls / APIs / agent payments → [`fiber-l402.md`](./tutorials/fiber-l402.md)
