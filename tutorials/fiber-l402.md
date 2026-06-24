@@ -26,16 +26,11 @@ Fiber's low-cost, instant payments make L402 practical for micropayments as smal
 
 ---
 
-## Two Ways to Build This
+## Application-Level L402
 
-There are two reference implementations in the ecosystem:
+This tutorial uses the application-level approach. It teaches the L402 flow end to end by implementing the payment challenge, macaroon handling, and invoice verification in your own app logic.
 
-| Approach | Demo | Complexity | When to Use |
-|----------|------|------------|-------------|
-| **Application-level L402** | `fiber-l402` (this tutorial) | Higher — custom middleware, macaroons, invoice/verify/settle logic | You want full control or need to support older Fiber nodes |
-| **Native x402 module** | `fiber-x402-blog` | Lower — delegates to Fiber node's built-in endpoints | You can run the [fiber#1301](https://github.com/nervosnetwork/fiber/pull/1301) branch |
-
-This tutorial covers the application-level approach because it teaches the mechanics. If you are starting a new project and can use the x402 branch, prefer [fiber-x402-blog](https://github.com/RetricSu/fiber-x402-blog).
+There is also an experiment method with native built-in x402 in fiber node which we will not cover in this tutorial, but feel free to check the [fiber-x402-blog](https://github.com/RetricSu/fiber-x402-blog) to learn more.
 
 ---
 
@@ -185,7 +180,7 @@ Make sure you have a funded Fiber node running before running E2E tests.
 
 ---
 
-## Step 7: Adapt It for Your Hackathon
+## Step 7: Adapt It for Your own idea
 
 Ideas for customizations:
 
@@ -194,24 +189,6 @@ Ideas for customizations:
 - **Subscriptions:** Issue macaroons with longer expiry and recurring payments.
 - **Agent payments:** Let an AI agent pay for data access automatically.
 - **Dynamic pricing:** Adjust price based on demand or content length.
-
----
-
-## Native x402 Alternative
-
-If you want a simpler implementation and can run the [fiber#1301](https://github.com/nervosnetwork/fiber/pull/1301) branch, use [fiber-x402-blog](https://github.com/RetricSu/fiber-x402-blog).
-
-Comparison:
-
-| | `fiber-l402` | `fiber-x402-blog` |
-|---|--------------|-------------------|
-| L402 implementation | Application-level via SDK | Native x402 module in Fiber node |
-| Backend complexity | Express proxy with custom middleware | Astro API routes only |
-| Fiber node requirement | Standard node `0.8.x` | Node with x402 PR |
-| Code size | Larger | Smaller |
-| Best for | Learning / full control | New projects / rapid prototyping |
-
-The x402 demo uses Astro API routes to forward invoice, verify, and settle requests to the Fiber node's built-in x402 endpoints. The merchant node's RPC URL stays server-side, and the payer node can be any standard Fiber node.
 
 ---
 
@@ -224,17 +201,6 @@ Before deploying a paywall to production:
 3. **Rate-limit the 402 endpoint.** Prevent abuse and invoice spam.
 4. **Handle invoice expiry.** If a user does not pay before the invoice expires, they must request a new challenge.
 5. **Use HTTPS.** L402 credentials and preimages should not travel over plaintext.
-
----
-
-## Common Issues
-
-| Symptom | Likely Cause | Fix |
-|---------|--------------|-----|
-| "402" keeps appearing | Preimage not sent or invalid | Check the browser console for the retry request |
-| "Invoice creation failed" | Node has no outbound liquidity | Open a channel and fund both sides |
-| "Macaroon verification failed" | Wrong `L402_ROOT_KEY` or expired macaroon | Regenerate key, clear cookies/localStorage, retry |
-| Frontend cannot pay | CORS or wrong `FIBER_RPC_URL` | Ensure the browser can reach the node RPC and COOP/COEP headers are set if using WASM |
 
 ---
 

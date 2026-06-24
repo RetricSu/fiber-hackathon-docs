@@ -1,6 +1,6 @@
 # Tutorial: Build a Two-Player Game on Fiber
 
-This tutorial walks through the [fiber-game](https://github.com/quake/fiber-demo/tree/main/fiber-game) demo: a decentralized rock-paper-scissors and guess-number game built on CKB Fiber. You will learn how to run the demo, understand its frontend-driven architecture, and adapt it for your own hackathon idea.
+This tutorial walks through the [fiber-game](https://github.com/quake/fiber-demo/tree/main/fiber-game) demo: a decentralized rock-paper-scissors and guess-number game built on CKB Fiber. You will learn how to run the demo, understand the hold-invoice gaming patterns, and adapt it for your own idea.
 
 ---
 
@@ -224,7 +224,7 @@ cargo test --test e2e_game_flow -- --nocapture
 
 ---
 
-## Step 8: Adapt It for Your Hackathon
+## Step 8: Adapt It for Your own idea
 
 Ideas for modifications:
 
@@ -247,21 +247,10 @@ The demo uses a **trusted oracle** for simplicity. Before going to production:
 
 ---
 
-## Common Issues
-
-| Symptom | Likely Cause | Fix |
-|---------|--------------|-----|
-| "Insufficient balance" | Channel has no outbound capacity | Fund both sides of the channel or open a new channel |
-| "Invoice expired" | Hold invoice timed out before reveal | Increase expiry or speed up the game |
-| "Cannot connect to node" | Wrong `FIBER_PLAYER_*_RPC_URL` | Verify the node is running and the URL matches |
-| Game state stuck | One player never revealed | Refresh and re-join, or implement timeout handling |
-
----
-
 ## Next Steps
 
 - Read the [fiber-l402 tutorial](./fiber-l402.md) to learn paywall patterns.
-- Explore the [Resources page](../resources.md) for SDKs and community projects.
+- Explore the [Resources page](../resources.md) for tooling and community projects.
 - Join the [Nervos Discord](https://discord.gg/BF9AJ4fzs6) if you get stuck.
 
 ---
