@@ -23,10 +23,10 @@ By the end of this path, you should be able to:
 
 Start with these references:
 
-- [What is Fiber Network?](https://www.fiber.world/docs)
+- [Fiber docs overview](https://www.fiber.world/docs)
 - [How Fiber Network Works](https://www.fiber.world/docs/how-it-works)
-- [Fiber Network Light Paper](https://github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md)
-- [Glossary](https://github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md)
+- [Quick start guide](https://www.fiber.world/docs/quick-start/run-a-node)
+- [Network resources](https://www.fiber.world/docs/quick-start/network-resources)
 
 Think through these three questions:
 
@@ -175,7 +175,7 @@ At this point, you should combine application design with operational planning. 
 - whether your app needs fast micro-payments, on-chain finality, or both
 - whether users will run their own node or whether your app will operate one on their behalf
 - whether this is a browser app, a backend service, or an agent-based workflow
-- how to manage liquidity, channel lifecycle, [backups](https://fiber-docs-git-doc20-ckba-team.vercel.app/docs/operate/backup) and key security
+- how to manage liquidity, channel lifecycle, [backups](https://www.fiber.world/docs/operate/backup) and key security
 
 This is the phase where you move from “hello world” to something that could support a real prototype or a production-style integration.
 
@@ -187,8 +187,8 @@ You can describe the operational risks and integration choices for running a nod
 
 ## Where to go next
 
-- [resources.md](./resources.md) for available tools and reference links
-- [tutorials/fiber-l402.md](./tutorials/fiber-l402.md) for paywall-style integration ideas
-- [tutorials/fiber-game.md](./tutorials/fiber-game.md) for a practical demo flow
+- [Network resources](https://www.fiber.world/docs/quick-start/network-resources) for available tools and reference links
+- [SDK guide](https://www.fiber.world/docs/build/sdk) for app integration ideas
+- [Simple game tutorial](https://www.fiber.world/docs/build/simple-game) for a practical demo flow
 
 If you get stuck, the official docs and the CKB builder community are the best places to continue from here.
