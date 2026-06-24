@@ -31,7 +31,7 @@ The cryptography (commitments + adaptor signatures) enforces fair play without a
 - Rust 1.75+ ([rustup](https://rustup.rs/))
 - `curl`, `tar`, `jq` (used by the setup script)
 - Two CKB testnet accounts with some CKB from the [faucet](https://faucet.nervos.org/)
-- Basic familiarity with running a Fiber node (see [Onboarding Workflow](./onboarding.md))
+- Basic familiarity with running a Fiber node (see [Onboarding Workflow](../onboarding.md))
 
 ---
 
@@ -251,7 +251,7 @@ The demo uses a **trusted oracle** for simplicity. Before going to production:
 
 - Read the [fiber-l402 tutorial](./fiber-l402.md) to learn paywall patterns.
 - Explore the [Resources page](../resources.md) for tooling and community projects.
-- Join the [Nervos Discord](https://discord.gg/BF9AJ4fzs6) if you get stuck.
+- Join the [Nervos Discord](https://discord.com/invite/BF9AJ4fzs6) if you get stuck.
 
 ---
 
