@@ -23,10 +23,10 @@ By the end of this path, you should be able to:
 
 Start with these references:
 
-- [Fiber docs overview](https://www.fiber.world/docs)
+- [What is Fiber Network?](https://www.fiber.world/docs)
 - [How Fiber Network Works](https://www.fiber.world/docs/how-it-works)
-- [Quick start guide](https://www.fiber.world/docs/quick-start/run-a-node)
-- [Network resources](https://www.fiber.world/docs/quick-start/network-resources)
+- [Fiber Network Light Paper](https://www.fiber.world/docs/res/light-paper)
+- [Glossary](https://www.fiber.world/docs/res/glossary)
 
 Think through these three questions:
 
@@ -187,8 +187,8 @@ You can describe the operational risks and integration choices for running a nod
 
 ## Where to go next
 
-- [Network resources](https://www.fiber.world/docs/quick-start/network-resources) for available tools and reference links
-- [SDK guide](https://www.fiber.world/docs/build/sdk) for app integration ideas
-- [Simple game tutorial](https://www.fiber.world/docs/build/simple-game) for a practical demo flow
+- [resources.md](./resources.md) for available tools and reference links
+- [tutorials/fiber-l402.md](./tutorials/fiber-l402.md) for paywall-style integration ideas
+- [tutorials/fiber-game.md](./tutorials/fiber-game.md) for a practical demo flow
 
 If you get stuck, the official docs and the CKB builder community are the best places to continue from here.
