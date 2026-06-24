@@ -30,9 +30,9 @@ Fiber Network is a peer-to-peer payment and swap network on CKB, similar in conc
 | Resource | Description | Link |
 |----------|-------------|------|
 | **Fiber Docs** | Primary official documentation site for getting started and building on Fiber. | [fiber.world/docs](https://www.fiber.world/docs) |
-| **Light Paper** | Protocol motivation and high-level design. | [github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md) |
-| **Glossary** | Key terms such as HTLC, PTLC, invoices, and routing concepts. | [github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md) |
-| **RPC Docs** | JSON-RPC methods and parameters for node integration. | [github.com/nervosnetwork/fiber/blob/develop/crates/fiber-lib/src/rpc/README.md](https://github.com/nervosnetwork/fiber/blob/develop/crates/fiber-lib/src/rpc/README.md) |
+| **Light Paper** | Protocol motivation and high-level design. | [fiber.world/docs/res/light-paper](https://www.fiber.world/docs/res/light-paper) |
+| **Glossary** | Key terms such as HTLC, PTLC, invoices, and routing concepts. | [fiber.world/docs/res/glossary](https://www.fiber.world/docs/res/glossary) |
+| **RPC Docs** | JSON-RPC methods and parameters for node integration. | [fiber.world/docs/api-reference](https://www.fiber.world/docs/api-reference) |
 | **SDK Docs** | Official SDK entry point for app development. | [fiber.world/docs/build/sdk](https://www.fiber.world/docs/build/sdk) |
 
 ---
@@ -69,7 +69,7 @@ Fiber Network is a peer-to-peer payment and swap network on CKB, similar in conc
 | **Fiber Node Installer** | Community automated installer for Windows/Linux with dashboard. | [github.com/tecmeup123/fiber-node-installer](https://github.com/tecmeup123/fiber-node-installer) |
 | **Fiber Studio** | Community native desktop app for running Fiber nodes | [github.com/chukwuma619/fiber-studio](https://github.com/chukwuma619/fiber-studio) |
 | **Fiber WSS Config Manual** | WebSocket secure configuration for nodes. | [github.com/nervosnetwork/fiber/blob/develop/docs/fiber-node-wss.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/fiber-node-wss.md) |
-| **Public Nodes Manual** | How to run a public, discoverable node. | [github.com/nervosnetwork/fiber/blob/develop/docs/public-nodes.md](https://github.com/nervosnetwork/fiber/blob/develop/docs/public-nodes.md) |
+| **Public Nodes Manual** | How to run a public, discoverable node. | [fiber.world/docs/operate/connect-nodes](https://www.fiber.world/docs/operate/connect-nodes) |
 
 ---
 

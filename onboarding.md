@@ -25,8 +25,8 @@ Start with these references:
 
 - [What is Fiber Network?](https://www.fiber.world/docs)
 - [How Fiber Network Works](https://www.fiber.world/docs/how-it-works)
-- [Fiber Network Light Paper](https://github.com/nervosnetwork/fiber/blob/develop/docs/light-paper.md)
-- [Glossary](https://github.com/nervosnetwork/fiber/blob/develop/docs/glossary.md)
+- [Fiber Network Light Paper](https://www.fiber.world/docs/res/light-paper)
+- [Glossary](https://www.fiber.world/docs/res/glossary)
 
 Think through these three questions:
 
@@ -175,7 +175,7 @@ At this point, you should combine application design with operational planning. 
 - whether your app needs fast micro-payments, on-chain finality, or both
 - whether users will run their own node or whether your app will operate one on their behalf
 - whether this is a browser app, a backend service, or an agent-based workflow
-- how to manage liquidity, channel lifecycle, [backups](https://fiber-docs-git-doc20-ckba-team.vercel.app/docs/operate/backup) and key security
+- how to manage liquidity, channel lifecycle, [backups](https://www.fiber.world/docs/operate/backup) and key security
 
 This is the phase where you move from “hello world” to something that could support a real prototype or a production-style integration.
 

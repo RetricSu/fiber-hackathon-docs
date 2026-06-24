@@ -31,7 +31,7 @@ The cryptography (commitments + adaptor signatures) enforces fair play without a
 - Rust 1.75+ ([rustup](https://rustup.rs/))
 - `curl`, `tar`, `jq` (used by the setup script)
 - Two CKB testnet accounts with some CKB from the [faucet](https://faucet.nervos.org/)
-- Basic familiarity with running a Fiber node (see [Onboarding Workflow](./onboarding.md))
+- Basic familiarity with running a Fiber node (see [Onboarding Workflow](../onboarding.md))
 
 ---
 
