@@ -62,7 +62,7 @@ You should be able to answer these three questions in your own words: why Fiber 
 For most developers, the fastest route is:
 
 1. follow the official quick-start guide for [Run a Fiber Node](https://www.fiber.world/docs/quick-start/run-a-node). Notes: use a pre-built binary first; build from source only if you need full control or custom development.
-2. You can also use [docker-compose](https://github.com/Officeyutong/fiber-demo-startup) to start 3 nodes on your local machine and use this frontend to inspect what a smallest Fiber network looks like.
+2. You can also use [docker-compose](https://github.com/HappySonnyDev/fiber-demo-startup/tree/demo-0.8) to start 3 nodes on your local machine and use the built-in [frontend app](https://github.com/HappySonnyDev/fiber-demo-startup/tree/demo-0.8#2-start-the-demo-app) to inspect what a smallest Fiber network looks like.
 
 ### Basic setup checklist
 
