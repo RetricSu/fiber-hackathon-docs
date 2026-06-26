@@ -43,7 +43,7 @@ Fiber Network is a peer-to-peer payment and swap network on CKB, similar in conc
 
 | Package | Purpose | Link |
 |---------|---------|------|
-| **`@ckb-ccc/fiber`** | Official JavaScript/TypeScript SDK for building apps on top of an existing Fiber node. Best starting point for most app integrations. | [fiber.world/docs/build/sdk/fiber-js](https://www.fiber.world/docs/build/sdk/fiber-js) |
+| **`@ckb-ccc/fiber`** | Official JavaScript/TypeScript SDK for building apps on top of an existing Fiber node. Best starting point for most app integrations. | [fiber.world/docs/build/sdk/js](https://www.fiber.world/docs/build/sdk/js) |
 | **`@nervosnetwork/fiber-js`** | Browser-oriented wrapper around the Fiber runtime. Keep this as a lower-level library for running fiber wasm node. | [npmjs.com/package/@nervosnetwork/fiber-js](https://www.npmjs.com/package/@nervosnetwork/fiber-js) |
 | **`@ckb-ccc/ccc`** | CKBers' Codebase — useful when your app needs wallet, transaction, or asset handling alongside Fiber. | [docs.ckbccc.com](https://docs.ckbccc.com/) |
 | **`@ckb-ccc/connector-react`** | React-based connector UI for CCC wallets. | [npmjs.com/package/@ckb-ccc/connector-react](https://www.npmjs.com/package/@ckb-ccc/connector-react) |
