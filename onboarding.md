@@ -134,7 +134,7 @@ At this stage, the main question is no longer “how do I run a node?” but “
 ### Recommended path
 
 - quickly go through the [SDK overview](https://www.fiber.world/docs/build/sdk)
-- learn the basics from the [JavaScript SDK guide](https://www.fiber.world/docs/build/sdk/fiber-js)
+- learn the basics from the [JavaScript SDK guide](https://www.fiber.world/docs/build/sdk/js)
 - Use the Javascript SDK to build a [simple game with Fiber micro-payments](https://www.fiber.world/docs/build/simple-game)
 
 ### What to learn
